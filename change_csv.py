@@ -16,8 +16,6 @@ data = [
 
 def change_csv(csv, values_dict):
     for movie in csv.iterrows():
-        csv["Budget"] = ""
-        csv["Director"] = ""
         for values in values_dict:
             csv["Budget"] = [d['budget'] for d in data]
             csv["Director"] = [d['director'] for d in data]
