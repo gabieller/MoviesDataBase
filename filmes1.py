@@ -32,7 +32,7 @@ def get_movie_info(id):
 def movies(csv):
     results = []
     for index, row in csv.iterrows():
-        movie_title = row["FILME"]
+        movie_title = row["MOVIE"]
         print(f"Buscando {movie_title}")
         movie_id = row["ID"]
         movie_info = get_movie_info(movie_id)
@@ -45,11 +45,12 @@ def extract_data(website_movies_list):
     for movie in website_movies_list:
         genres = "Drama"
         dict_movie = {
-            "vote_average": movie["vote_average"],
+            "vote_average": (movie["vote_average"]/2),
             'vote_count': movie['vote_count'],
             'runtime': movie['runtime'],
             'genres':  genres,
             'budget': movie['budget'],
+            'revenue': movie['revenue']
         }
         result_movies.append(dict_movie)
     return result_movies
@@ -63,7 +64,7 @@ def change_csv(csv, values_dict):
             csv["Runtime"] = [d['runtime'] for d in data]
             csv["Genres"] = [d['genres'] for d in data]
             csv["Budget"] = [d['budget'] for d in data]
-
+            csv["Revenue"] = [d['revenue'] for d in data]
     csv.to_csv("Movies_new.csv", index=False)
     return csv
 
@@ -72,4 +73,5 @@ get = movies(df)
 
 data = extract_data(get)
 
-change_csv(df,data)
+csv = change_csv(df,data)
+print(csv.head())
