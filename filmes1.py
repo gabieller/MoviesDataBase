@@ -65,7 +65,7 @@ def change_csv(csv, values_dict):
             csv["Genres"] = [d['genres'] for d in data]
             csv["Budget"] = [d['budget'] for d in data]
             csv["Revenue"] = [d['revenue'] for d in data]
-    csv.to_csv("Movies_new.csv", index=False)
+    csv.to_csv("Movies_new.csv", index=True)
     return csv
 
 
