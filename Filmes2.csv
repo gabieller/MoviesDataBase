@@ -1,4 +1,4 @@
-ID,MOVIE,YEAR,RATING,WATCHED,CINEMA
+ID,Movie,Year,Rating,Watched,Cinema
 281957,The Revenant,2015,4,2016-01-01,False
 333371,10 Cloverfield Lane,2016,5,2016-04-10,True
 46738,Incendies,2010,4,2016-05-27,False

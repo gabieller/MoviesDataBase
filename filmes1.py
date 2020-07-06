@@ -32,7 +32,7 @@ def get_movie_info(id):
 def movies(csv):
     results = []
     for index, row in csv.iterrows():
-        movie_title = row["MOVIE"]
+        movie_title = row["Movie"]
         print(f"Buscando {movie_title}")
         movie_id = row["ID"]
         movie_info = get_movie_info(movie_id)
@@ -40,15 +40,32 @@ def movies(csv):
     return results
 
 
+#genres = [{"id": 0, "name": "drama"}, {"id": 2, "name": "horror"}]
+
+def format_genres(website_genre_list):
+    teste = []
+    separator = "|"
+    for movie_item in website_genre_list:
+        genre_dict = {'genres': movie_item['genres'], }
+        only_genres = [d.get('name')
+                       for sublists in genre_dict.values() for d in sublists]
+        print (teste.append(only_genres))
+
+    for sublists in teste:
+        values = separator.join(str(v) for v in sublists)
+        return(values)
+
+
 def extract_data(website_movies_list):
     result_movies = []
+    genres = format_genres(get)
+    print(genres)
     for movie in website_movies_list:
-        genres = "Drama"
         dict_movie = {
             "vote_average": (movie["vote_average"]/2),
             'vote_count': movie['vote_count'],
             'runtime': movie['runtime'],
-            'genres':  genres,
+            'genres': genres,
             'budget': movie['budget'],
             'revenue': movie['revenue']
         }
@@ -70,8 +87,16 @@ def change_csv(csv, values_dict):
 
 
 get = movies(df)
+formated = format_genres(get)
+
+print(formated)
 
 data = extract_data(get)
-
 csv = change_csv(df,data)
 print(csv.head())
+
+
+
+# formated = format_genres(genres)
+# print(formated)
+# # formated tem que ser igual 'drama|horror'
