@@ -40,63 +40,57 @@ def movies(csv):
     return results
 
 
-#genres = [{"id": 0, "name": "drama"}, {"id": 2, "name": "horror"}]
-
 def format_genres(website_genre_list):
-    teste = []
+    first_list = []
+    second_list = []
     separator = "|"
     for movie_item in website_genre_list:
         genre_dict = {'genres': movie_item['genres'], }
         only_genres = [d.get('name')
                        for sublists in genre_dict.values() for d in sublists]
-        print (teste.append(only_genres))
+        first_list.append(only_genres)
 
-    for sublists in teste:
+    for sublists in first_list:
         values = separator.join(str(v) for v in sublists)
-        return(values)
+        second_list.append(values)
+    return(second_list)
 
 
 def extract_data(website_movies_list):
     result_movies = []
-    genres = format_genres(get)
-    print(genres)
+    i=0
     for movie in website_movies_list:
         dict_movie = {
             "vote_average": (movie["vote_average"]/2),
             'vote_count': movie['vote_count'],
             'runtime': movie['runtime'],
-            'genres': genres,
+            'genres': format_genres(website_movies_list)[i],
             'budget': movie['budget'],
             'revenue': movie['revenue']
         }
         result_movies.append(dict_movie)
+        i+=1
     return result_movies
 
 
 def change_csv(csv, values_dict):
     for movie in csv.iterrows():
         for values in values_dict:
-            csv["Vote Average"] = [d['vote_average'] for d in data]
-            csv["Vote Count"] = [d['vote_count'] for d in data]
-            csv["Runtime"] = [d['runtime'] for d in data]
-            csv["Genres"] = [d['genres'] for d in data]
-            csv["Budget"] = [d['budget'] for d in data]
-            csv["Revenue"] = [d['revenue'] for d in data]
+            csv["Vote Average"] = [d['vote_average'] for d in getting_information]
+            csv["Vote Count"] = [d['vote_count'] for d in getting_information]
+            csv["Runtime"] = [d['runtime'] for d in getting_information]
+            csv["Genres"] = [d['genres'] for d in getting_information]
+            csv["Budget"] = [d['budget'] for d in getting_information]
+            csv["Revenue"] = [d['revenue'] for d in getting_information]
     csv.to_csv("Movies_new.csv", index=True)
     return csv
 
 
-get = movies(df)
-formated = format_genres(get)
-
-print(formated)
-
-data = extract_data(get)
-csv = change_csv(df,data)
-print(csv.head())
+seaching_movies = movies(df)
+getting_information = extract_data(seaching_movies)
+new_csv = change_csv(df, getting_information)
+print(new_csv.head())
 
 
+#formated = format_genres(seaching_movies)
 
-# formated = format_genres(genres)
-# print(formated)
-# # formated tem que ser igual 'drama|horror'
