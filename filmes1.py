@@ -6,7 +6,7 @@ import api
 
 MOVIE_DETAILS = "https://api.themoviedb.org/3/movie/"
 
-df = pd.read_csv("Filmes2.csv")
+df = pd.read_csv("Movies.csv")
 
 
 def format_date(date):
@@ -32,7 +32,7 @@ def get_movie_info(id):
 def movies(csv):
     results = []
     for index, row in csv.iterrows():
-        movie_title = row["Movie"]
+        movie_title = row["MOVIE"]
         print(f"Buscando {movie_title}")
         movie_id = row["ID"]
         movie_info = get_movie_info(movie_id)
@@ -72,7 +72,7 @@ def change_csv(csv, values_dict):
             csv["Genres"] = [d['genres'] for d in getting_information]
             csv["Budget"] = [d['budget'] for d in getting_information]
             csv["Revenue"] = [d['revenue'] for d in getting_information]
-    csv.to_csv("Movies_new.csv", index=True)
+    csv.to_csv("Movies_new.csv", index=False)
     return csv
 
 
