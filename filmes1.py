@@ -40,43 +40,33 @@ def movies(csv):
     return results
 
 
-def format_genres(website_genre_list):
-    first_list = []
-    second_list = []
-    separator = "|"
-    for movie_item in website_genre_list:
-        genre_dict = {'genres': movie_item['genres'], }
-        only_genres = [d.get('name')
-                       for sublists in genre_dict.values() for d in sublists]
-        first_list.append(only_genres)
-
-    for sublists in first_list:
-        values = separator.join(str(v) for v in sublists)
-        second_list.append(values)
-    return(second_list)
+def format_genres(genres):
+    names = []
+    for genre in genres:
+        names.append(genre['name'])
+    return "|".join(names)
 
 
 def extract_data(website_movies_list):
     result_movies = []
-    i=0
     for movie in website_movies_list:
         dict_movie = {
             "vote_average": (movie["vote_average"]/2),
             'vote_count': movie['vote_count'],
             'runtime': movie['runtime'],
-            'genres': format_genres(website_movies_list)[i],
+            'genres': format_genres(movie['genres']),
             'budget': movie['budget'],
             'revenue': movie['revenue']
         }
         result_movies.append(dict_movie)
-        i+=1
     return result_movies
 
 
 def change_csv(csv, values_dict):
     for movie in csv.iterrows():
         for values in values_dict:
-            csv["Vote Average"] = [d['vote_average'] for d in getting_information]
+            csv["Vote Average"] = [d['vote_average']
+                                   for d in getting_information]
             csv["Vote Count"] = [d['vote_count'] for d in getting_information]
             csv["Runtime"] = [d['runtime'] for d in getting_information]
             csv["Genres"] = [d['genres'] for d in getting_information]
@@ -93,4 +83,3 @@ print(new_csv.head())
 
 
 #formated = format_genres(seaching_movies)
-
