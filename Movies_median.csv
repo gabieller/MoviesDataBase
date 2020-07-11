@@ -1,4 +1,4 @@
-ID,MOVIE,YEAR,RATING,WATCHED,CINEMA,Vote Average,Vote Count,Runtime,Genres,Budget,Revenue
+ID,Movie,Year,Rating,Watched,Cinema,Vote Average,Vote Count,Runtime,Genres,Budget,Revenue
 281957,The Revenant,2015,4,2016-01-01,False,3.75,13277,157,Western|Drama|Adventure,135000000.0,532950503.0
 273248,The Hateful 8,2015,5,2016-01-02,True,3.85,9980,188,Crime|Drama|Mystery|Western,44000000.0,155760117.0
 9741,Unbreakable,2000,3,2016-01-03,False,3.55,6312,106,Thriller|Drama|Mystery,75000000.0,248118121.0
