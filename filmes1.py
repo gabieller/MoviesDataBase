@@ -44,7 +44,6 @@ def format_genres(genres):
     names = []
     for genre in genres:
         names.append(genre['name'])
-        names.strip()
     return "|".join(names)
 
 
