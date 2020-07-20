@@ -44,6 +44,9 @@ def format_genres(genres):
     names = []
     for genre in genres:
         names.append(genre['name'])
+    for i, genre in enumerate(names):
+        if genre == "Science Fiction":
+            names[i] = 'SciFi'
     return "|".join(names)
 
 
@@ -72,7 +75,6 @@ def change_csv(csv, values_dict):
             csv["Genres"] = [d['genres'] for d in getting_information]
             csv["Budget"] = [d['budget'] for d in getting_information]
             csv["Revenue"] = [d['revenue'] for d in getting_information]
-            #csv["Profit"] = [d['revenue'] - d['budget'] for d in getting_information]
     csv.to_csv("Movies_new.csv", index=False)
     return csv
 
