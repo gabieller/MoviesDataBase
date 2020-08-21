@@ -59,7 +59,8 @@ def extract_data(website_movies_list):
             'runtime': movie['runtime'],
             'genres': format_genres(movie['genres']),
             'budget': movie['budget'],
-            'revenue': movie['revenue']
+            'revenue': movie['revenue'],
+            'overview': movie['overview']
         }
         result_movies.append(dict_movie)
     return result_movies
@@ -75,8 +76,10 @@ def change_csv(csv, values_dict):
             csv["Genres"] = [d['genres'] for d in getting_information]
             csv["Budget"] = [d['budget'] for d in getting_information]
             csv["Revenue"] = [d['revenue'] for d in getting_information]
+            csv["Overview"] = [d['overview'] for d in getting_information]
     csv.to_csv("Movies_new.csv", index=False)
     return csv
+
 
 
 seaching_movies = movies(df)
